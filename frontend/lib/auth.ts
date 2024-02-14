@@ -2,8 +2,11 @@
 
 // https://github.com/jeffroche/nextjs-django-auth-example/blob/master/www/auth.tsx
 
+const API_BASE = process.env.BACKEND_URL;
+
 export async function fetchNewTokens(username: string, password: string) {
-  const url = process.env.BACKEND_URL + "/api/token/";
+  const url = API_BASE + "/api/token/";
+  console.log(url);
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({ username, password }),
@@ -15,21 +18,11 @@ export async function fetchNewTokens(username: string, password: string) {
   return response;
 }
 
-export async function formLogin(
-  prevState: string | null,
-  formData: FormData
-): Promise<string | null> {
-  const username = formData.get("username")?.toString() || "";
-  const password = formData.get("password")?.toString() || "";
-
+export async function login(username: string, password: string) {
   const response = await fetchNewTokens(username, password);
-  if (response.status !== 200) {
-    return "Could not fetch tokens.";
+  if (!response.ok) {
+    return null;
   }
-
-  const result = await response.json();
-  const accessToken = await result["access"] || "";
-  const refreshToken = await result["refresh"] || "";
-  console.log(accessToken, refreshToken);
-  return null;
+  const payload = await response.json();
+  return payload["access"];
 }

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'corsheaders',
 ]
 
 SITE_ID = 1
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'snippety.urls'
@@ -158,3 +160,11 @@ REST_AUTH = {
     "JWT_AUTH_COOKIE": env("JWT_AUTH_COOKIE"),
     "JWT_AUTH_REFRESH_COOKIE": env("JWT_AUTH_REFRESH_COOKIE")
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+# This seems to set the Access-Control-Allow-Credentials header necessary
+# for cross origin to work
+CORS_ALLOW_CREDENTIALS = True 
