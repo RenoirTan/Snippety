@@ -290,4 +290,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+!frontend/lib
 data/
