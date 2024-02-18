@@ -1,11 +1,9 @@
-"use server";
-
 // https://github.com/jeffroche/nextjs-django-auth-example/blob/master/www/auth.tsx
 
-const API_BASE = process.env.BACKEND_URL;
+import { apiLoginUrl } from "@/lib/urls";
 
 export async function fetchNewTokens(username: string, password: string) {
-  const url = API_BASE + "/api/token/";
+  const url = await apiLoginUrl();
   console.log(url);
   const response = await fetch(url, {
     method: "POST",

@@ -161,12 +161,16 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": env("JWT_AUTH_REFRESH_COOKIE"),
     # https://stackoverflow.com/a/75598507
     # Temporary fix
-    "JWT_AUTH_HTTPONLY": False,
+    # "JWT_AUTH_HTTPONLY": False,
 }
 
+# """
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+# """
+
+# CORS_ALLOW_ALL_ORIGINS = True
 
 # This seems to set the Access-Control-Allow-Credentials header necessary
 # for cross origin to work
