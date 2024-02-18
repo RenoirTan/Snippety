@@ -1,7 +1,11 @@
+"use client";
+
+import { useAuth } from "@/lib/auth-provider";
 import { getUsersList } from "@/lib/data";
 
 export default async function Page() {
-  const response = await getUsersList();
+  const { getProtectedJson } = useAuth();
+  const response = getProtectedJson("http://localhost:8000/users/");
   if (response.ok) {
     const usersList = await response.json();
     return (
