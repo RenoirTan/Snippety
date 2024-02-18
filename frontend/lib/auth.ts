@@ -1,6 +1,6 @@
 // https://github.com/jeffroche/nextjs-django-auth-example/blob/master/www/auth.tsx
 
-import { apiLoginUrl, apiLogoutUrl } from "@/lib/urls";
+import { apiLoginUrl, apiLogoutUrl, apiRefreshTokenUrl } from "@/lib/urls";
 import { postJson } from "@/lib/fetching";
 
 export async function fetchNewTokens(username: string, password: string) {
@@ -20,4 +20,8 @@ export async function login(username: string, password: string) {
 
 export async function logout() {
   return await postJson(await apiLogoutUrl(), true, {});
+}
+
+export async function refreshTokens() {
+  return await postJson(await apiRefreshTokenUrl(), true, {});
 }
