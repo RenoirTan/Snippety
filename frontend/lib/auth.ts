@@ -24,5 +24,5 @@ export async function login(username: string, password: string) {
     return null;
   }
   const payload = await response.json();
-  return payload["access"];
+  return payload;
 }

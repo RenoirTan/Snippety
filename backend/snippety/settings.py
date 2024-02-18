@@ -158,7 +158,10 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_COOKIE": env("JWT_AUTH_COOKIE"),
-    "JWT_AUTH_REFRESH_COOKIE": env("JWT_AUTH_REFRESH_COOKIE")
+    "JWT_AUTH_REFRESH_COOKIE": env("JWT_AUTH_REFRESH_COOKIE"),
+    # https://stackoverflow.com/a/75598507
+    # Temporary fix
+    "JWT_AUTH_HTTPONLY": False,
 }
 
 CORS_ALLOWED_ORIGINS = [
