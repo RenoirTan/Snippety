@@ -1,17 +1,11 @@
 // https://github.com/jeffroche/nextjs-django-auth-example/blob/master/www/auth.tsx
 
-import { apiLoginUrl } from "@/lib/urls";
+import { apiLoginUrl, apiLogoutUrl } from "@/lib/urls";
+import { postJson } from "@/lib/fetching";
 
 export async function fetchNewTokens(username: string, password: string) {
   const url = await apiLoginUrl();
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify({ username, password }),
-    headers: {
-      "Content-Type": "application/json"
-    },
-    credentials: "include"
-  });
+  const response = await postJson(url, true, { username, password });
   return response;
 }
 
@@ -22,4 +16,8 @@ export async function login(username: string, password: string) {
   }
   const payload = await response.json();
   return payload;
+}
+
+export async function logout() {
+  return await postJson(await apiLogoutUrl(), true, {});
 }
