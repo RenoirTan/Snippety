@@ -23,3 +23,5 @@ export const apiLoginUrl = async () => await makeApiUrl("/dj-rest-auth/login/");
 export const apiLogoutUrl = async () => await makeApiUrl("/dj-rest-auth/logout/");
 
 export const apiRefreshTokenUrl = async () => await makeApiUrl("/dj-rest-auth/token/refresh/");
+
+export const apiUsersListUrl = async () => await makeApiUrl("/users/");
