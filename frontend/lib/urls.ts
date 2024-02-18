@@ -19,3 +19,5 @@ export async function makeApiUrl(path?: string | null): Promise<string> {
 }
 
 export const apiLoginUrl = async () => await makeApiUrl("/dj-rest-auth/login/");
+
+export const apiLogoutUrl = async () => await makeApiUrl("/dj-rest-auth/logout/");

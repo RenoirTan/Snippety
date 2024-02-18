@@ -4,7 +4,6 @@ import { apiLoginUrl } from "@/lib/urls";
 
 export async function fetchNewTokens(username: string, password: string) {
   const url = await apiLoginUrl();
-  console.log(url);
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({ username, password }),
