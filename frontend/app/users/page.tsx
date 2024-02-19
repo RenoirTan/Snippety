@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/lib/auth-provider";
+import { apiUsersListUrl } from "@/lib/urls";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -8,13 +9,15 @@ export default function Page() {
   const [data, setData] = useState<any[] | null>(null);
   useEffect(() => {
     if (data === null) {
-      getProtectedJson("http://localhost:8000/users/")
-        .then(async (res) => {
-          if (res) {
-            const parsed = await res.json();
-            setData(parsed);
-          }
-        });
+      (async () => {
+        // apparently calling server functions here is allowed???
+        const url = await apiUsersListUrl();
+        const response = await getProtectedJson(url);
+        if (response) {
+          const parsed = await response.json();
+          setData(parsed);
+        }
+      })();
     }
   }, [data]);
   if (data) {
