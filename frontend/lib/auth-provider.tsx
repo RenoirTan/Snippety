@@ -1,3 +1,6 @@
+// adapted from https://github.com/jeffroche/nextjs-django-auth-example
+// not used tho
+
 import React, { createContext, useContext, useState } from "react";
 
 export type AuthContextType = {
