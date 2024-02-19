@@ -2,6 +2,11 @@
 
 This is my testing ground to try and integrate Django and some front-end framework (probably Next.js but Flask kinda counts).
 
+## Uhh
+
+Doesn't really work right now. The users page is fetching at least twice and isn't updating when
+a new response is received.
+
 ## Install
 
 ```bash
