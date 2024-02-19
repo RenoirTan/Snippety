@@ -1,7 +1,26 @@
 import React, { createContext, useContext, useState } from "react";
-import { apiLoginUrl, apiLogoutUrl, apiRefreshTokenUrl } from "./urls";
 
-export const AuthContext = createContext({});
+export type AuthContextType = {
+  authenticated: boolean;
+  login: (username: string, password: string) => Promise<Response>;
+  logout: () => Promise<void>;
+  getProtectedJson: (url: string) => Promise<Response | null>;
+  postProtectedJson: (url: string, data: any) => Promise<Response | null>;
+};
+
+export const AuthContext = createContext<AuthContextType>({
+  authenticated: false,
+  async login(username, password) {
+    return fetchNewTokenPair(username, password);
+  },
+  async logout() { },
+  async getProtectedJson(url) {
+    return null;
+  },
+  async postProtectedJson(url, data) {
+    return null;
+  }
+});
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -83,6 +102,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode; 
       }
       await refreshToken();
     }
+    return null;
   }
 
   async function postProtectedJson(url: string, data: any) {
@@ -100,6 +120,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode; 
       }
       await refreshToken();
     }
+    return null;
   }
 
   const value = {

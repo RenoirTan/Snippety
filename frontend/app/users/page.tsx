@@ -9,13 +9,13 @@ export default function Page() {
   const [data, setData] = useState([]);
   useEffect(() => {
     getProtectedJson("http://localhost:8000/users/")
-      .then((res: Response) => {
+      .then(async (res) => {
         setResponse(response);
-        return res.json()
-      })
-      .then((data: any) => {
-        console.log(data);
-        setData(data)
+        if (res) {
+          const parsed = await res.json();
+          console.log(parsed);
+          setData(parsed);
+        }
       });
   }, []);
   if (!response) {
