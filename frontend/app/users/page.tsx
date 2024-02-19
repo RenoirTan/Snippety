@@ -5,30 +5,25 @@ import { useEffect, useState } from "react";
 
 export default function Page() {
   const { getProtectedJson } = useAuth();
-  const [response, setResponse] = useState<Response | null>(null);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[] | null>(null);
   useEffect(() => {
-    getProtectedJson("http://localhost:8000/users/")
-      .then(async (res) => {
-        setResponse(response);
-        if (res) {
-          const parsed = await res.json();
-          console.log(parsed);
-          setData(parsed);
-        }
-      });
-  }, []);
-  if (!response) {
-    return <p>No response</p>;
-  } else if (response.ok) {
-    return (
-      <ul>
-        {data.map((user: any) =>
-          <li key={user.username}>{user.username}</li>
-        )}
-      </ul>
-    );
+    if (data === null) {
+      getProtectedJson("http://localhost:8000/users/")
+        .then(async (res) => {
+          if (res) {
+            const parsed = await res.json();
+            setData(parsed);
+          }
+        });
+    }
+  }, [data]);
+  if (data) {
+    return <ul>
+      {data.map((user: any) =>
+        <li key={user.username}>{user.username}</li>
+      )}
+    </ul>;
   } else {
-    return <p>{response.status}</p>
+    return <p>No data</p>;
   }
 }
