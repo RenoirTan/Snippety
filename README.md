@@ -24,3 +24,4 @@ pip install -r requirements.txt
 - [djangorestframework-simplejwt](https://github.com/jazzband/djangorestframework-simplejwt)
 - [Using PostgreSQL with Django](https://djangocentral.com/using-postgresql-with-django/)
 - [django-environ](https://github.com/joke2k/django-environ)
+- [nextjs-django-auth-example](https://github.com/jeffroche/nextjs-django-auth-example)
