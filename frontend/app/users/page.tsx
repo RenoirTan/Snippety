@@ -1,23 +1,34 @@
 "use client";
 
 import { useAuth } from "@/lib/auth-provider";
-import { getUsersList } from "@/lib/data";
+import { useEffect, useState } from "react";
 
-export default async function Page() {
+export default function Page() {
   const { getProtectedJson } = useAuth();
-  const response = getProtectedJson("http://localhost:8000/users/");
-  if (response.ok) {
-    const usersList = await response.json();
+  const [response, setResponse] = useState<Response | null>(null);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getProtectedJson("http://localhost:8000/users/")
+      .then((res: Response) => {
+        setResponse(response);
+        return res.json()
+      })
+      .then((data: any) => {
+        console.log(data);
+        setData(data)
+      });
+  }, []);
+  if (!response) {
+    return <p>No response</p>;
+  } else if (response.ok) {
     return (
       <ul>
-        {usersList.map((u: any) => {
-          <li key={u.username}>{u.username}</li>
-        })}
+        {data.map((user: any) =>
+          <li key={user.username}>{user.username}</li>
+        )}
       </ul>
     );
   } else {
-    return (
-      <p>Could not get users.</p>
-    );
+    return <p>{response.status}</p>
   }
 }

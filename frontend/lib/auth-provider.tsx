@@ -73,7 +73,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode; 
   }
 
   async function getProtectedJson(url: string) {
-    for (let i = 2; i > 0; i++) {
+    for (let i = 2; i > 0; i--) {
       const response = await fetch(url, {
         method: "GET",
         credentials: "include"
@@ -86,7 +86,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode; 
   }
 
   async function postProtectedJson(url: string, data: any) {
-    for (let i = 2; i > 0; i++) {
+    for (let i = 2; i > 0; i--) {
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
